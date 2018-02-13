@@ -24,6 +24,16 @@ public class PersonController {
         return personService.getPersonById(id);
     }
 
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    public void deletePerson(@PathVariable int id) {
+        personService.deletePerson(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Person createPerson(@RequestBody Person person) {
+        return personService.createPerson(person);
+    }
+
     @Autowired
     public void setPersonService(PersonService personService) {
         this.personService = personService;

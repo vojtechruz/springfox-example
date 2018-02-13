@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalInt;
 
 @Service
 public class PersonService {
@@ -36,5 +38,23 @@ public class PersonService {
                 .filter(person -> person.getId() == id)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public Person createPerson(Person person) {
+        OptionalInt maxId = this.persons.stream().mapToInt(Person::getId).max();
+        if (maxId.isPresent()) {
+            person.setId(maxId.getAsInt()+1);
+        }
+
+        return person;
+    }
+
+    public void deletePerson(int id) {
+        for (Person person : this.persons) {
+            if(person.getId() == id) {
+                this.persons.remove(person);
+                return;
+            }
+        }
     }
 }
