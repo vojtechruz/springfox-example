@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/persons/")
+@RequestMapping("/v2/persons/")
 public class PersonController {
 
     private PersonService personService;
